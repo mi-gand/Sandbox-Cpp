@@ -34,7 +34,6 @@ int main()
 		bool PetyaWin = checkWin(gameBoard, Petya);
 		bool VasyaWin = checkWin(gameBoard, Vasya);
 		finalCheck(gameBoard, PetyaWin, VasyaWin, Petya, Vasya);
-
 	}
 	catch (int8_t)
 	{
@@ -55,10 +54,6 @@ int main()
 
 	return 0;
 }
-
-
-
-
 
 void validSymbol(char gameBoard[height][width], bool& flagOut)
 {
@@ -81,7 +76,6 @@ void validSymbol(char gameBoard[height][width], bool& flagOut)
 
 bool checkWin(const char gameBoard[height][width], char symbol)
 {
-
 	int win = 0;
 	if (gameBoard[0][0] == symbol and gameBoard[0][1] == symbol and gameBoard[0][2] == symbol) win++;
 	if (gameBoard[1][0] == symbol and gameBoard[1][1] == symbol and gameBoard[1][2] == symbol) win++;
@@ -97,7 +91,6 @@ bool checkWin(const char gameBoard[height][width], char symbol)
 	if (win > 1) throw Incorrect;
 	if (win == 0) return false;
 	if (win == 1) return true;
-
 }
 
 void finalCheck(const char gameBoard[height][width], bool personWin1, bool personWin2, char Person1, char Person2)
@@ -118,5 +111,4 @@ void finalCheck(const char gameBoard[height][width], bool personWin1, bool perso
 		if (personWin1 == 1) throw PetyaWin;
 		if (personWin2 == 1) throw VasyaWin;
 	}
-
 }
