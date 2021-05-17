@@ -3,11 +3,11 @@
 #include <string_view>
 #include <vector>
 
-std::vector<std::string_view> SplitString(const std::string_view line,
+std::vector<std::string_view> SplitString(const std::string_view line,			//функция для разбиения строки на составляющие
 	const char delimiter);
-bool validation(std::string ip, bool flagAllGood);
-bool checkQuatersString(const std::vector<std::string_view>& array, bool &flagAllGood);
-bool checkQuatersInt(int &part, bool& flagAllGood);
+bool validation(std::string ip, bool flagAllGoodOut);										//общая функция проверки IP
+bool checkQuatersString(const std::vector<std::string_view>& array, bool &flagAllGood);		//проверка строки на валидные символы
+bool checkQuatersInt(int &part, bool& flagAllGood);											//проверка на диапазон 0...255
 
 int main()
 {
@@ -17,12 +17,8 @@ int main()
 	std::getline(std::cin, ip);
 	bool flagAllGood = true;
 	validation(ip, flagAllGood);
-
 	if (validation(ip, flagAllGood)) std::cout << "Yes";
 	else std::cout << "No";
-
-	
-
 }
 bool validation(const std::string ip, bool flagAllGood)
 {
@@ -37,7 +33,6 @@ bool validation(const std::string ip, bool flagAllGood)
 			flagAllGood = true;
 		}
 		else return flagAllGood = false;
-
 	}
 	if (dotCounter not_eq 3 or charCounter > 15)
 	{
@@ -46,10 +41,8 @@ bool validation(const std::string ip, bool flagAllGood)
 	std::string_view _ip = ip;
 	char delimiter = '.';
 	std::vector<std::string_view> array = SplitString(_ip, delimiter);
-
 	if (checkQuatersString(array, flagAllGood)) flagAllGood = true;
 	else return flagAllGood = false;
-
 
 	int part1 = atoi((array.at(0).data()));
 	int part2 = atoi((array.at(1).data()));
@@ -90,13 +83,10 @@ bool checkQuatersString(const std::vector<std::string_view> &array, bool &flagAl
 	return flagAllGood;
 }
 
-
-
 bool checkQuatersInt(int &part, bool &flagAllGood)
 {
 	if (part > 255) return flagAllGood = false;;
 }
-
 
 std::vector<std::string_view> SplitString(const std::string_view line,
 	const char delimiter) 
@@ -116,4 +106,3 @@ std::vector<std::string_view> SplitString(const std::string_view line,
 
 	return tokens;
 }
-

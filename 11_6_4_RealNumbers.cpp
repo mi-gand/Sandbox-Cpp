@@ -9,12 +9,10 @@ std::vector<std::string> SplitString(const std::string line,
 int main()
 {
 	setlocale(LC_ALL, "ru");
-
 	bool validationGross = false;				//флаг для первичной проверка корректности введенных данных
 	std::string firstNumber{}, secondNumber{};
-	bool negativeSign1{ false };
+	bool negativeSign1{ false };				//флаги для проверки наличия знаков у 2 чисел
 	bool negativeSign2{ false };
-
 
 	do											//цикл для первичной проверка валидности введенных данных
 	{
@@ -23,8 +21,7 @@ int main()
 
 	} while (!(symbolValidation(firstNumber, validationGross, negativeSign1) and (symbolValidation(secondNumber, validationGross, negativeSign2))));
 
-	//ищем где индекс точки. Если нет, то считаем, что в конце числа стоит точка и там ноль
-	int dotIndex1{};
+	int dotIndex1{};							//ищем где индекс точки и ставим флаг наличия точки
 	bool flagDot1{ false };
 	int dotIndex2{};
 	bool flagDot2{ false };
@@ -47,30 +44,27 @@ int main()
 			break;
 		}
 	}
-
-	
-
 	const char delimiter = '.';									//обозначаем разделитель и бьем каждую строку на 1 или 2 вектора
 	int firstInteger{ 0 };
 	int secondInteger{ 0 };
+
 	std::vector <std::string> first_array = SplitString(firstNumber, delimiter);
 	std::vector <std::string> second_array = SplitString(secondNumber, delimiter);
 
-	firstInteger = atoi((first_array.at(0).data()));			//коныертируем первое значение контейнера в целое число
-	secondInteger = atoi((second_array.at(0).data()));			//коныертируем второе значение контейнера в целое число
+	firstInteger = atoi((first_array.at(0).data()));			//конвертируем первое значение контейнера в целое число
+	secondInteger = atoi((second_array.at(0).data()));			//конвертируем второе значение контейнера в целое число
 
 	try															//для того чтоб не писать ф-ции (и потыкаться в новый инструмент) вводим исключения
-	{	
+	{
 		int More = 1;
 		double Equal = 7.7;
 		char Less = 'L';
 
 		if (firstInteger > secondInteger) throw More;			//сначала сравниваем целые числа
 		if (firstInteger < secondInteger) throw Less;
-		if (firstInteger == secondInteger and std::size(first_array)== 1 and std::size(second_array) == 1 ) throw Equal;
+		if (firstInteger == secondInteger and std::size(first_array) == 1 and std::size(second_array) == 1) throw Equal;
 		if (firstInteger == secondInteger)						//если целые равны, то переходим к сравнению десятичных чисел
 		{
-			
 			if (std::size(first_array[1]) < std::size(second_array[1]))					//докидываю нули в конец, чтоб одинаковое количество значений было
 			{
 				int difference = std::size(second_array[1]) - std::size(first_array[1]);
@@ -118,8 +112,6 @@ int main()
 	{
 		std::cout << "Equal";
 	}
-
-	
 }
 bool symbolValidation(std::string number, bool validation, bool& signOut)
 {
@@ -127,7 +119,7 @@ bool symbolValidation(std::string number, bool validation, bool& signOut)
 	for (unsigned int index = 0; index < std::size(number); index++)
 	{
 
-		if (number[index] >= '0' and number[index] <= '9' or number[index] == '.' or number[0] == '-' )
+		if (number[index] >= '0' and number[index] <= '9' or number[index] == '.' or number[0] == '-')
 		{
 			validation = true;
 			if (number[0] == '-') signOut = true;
@@ -154,6 +146,5 @@ std::vector<std::string> SplitString(const std::string line,
 		}
 		begin = end + 1;
 	}
-
 	return tokens;
 }

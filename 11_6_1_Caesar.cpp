@@ -7,7 +7,6 @@ std::string decrypt_caesar(std::string hash, char hash_number);
 const char hash_number = 25;
 const char alphabet = 26;
 
-
 int main(void)
 {
 	std::cout << "Enter worls: " << std::endl;
