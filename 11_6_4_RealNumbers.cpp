@@ -118,7 +118,6 @@ bool symbolValidation(std::string number, bool validation, bool& signOut)
 	int dotCounter = 0;
 	for (unsigned int index = 0; index < std::size(number); index++)
 	{
-
 		if (number[index] >= '0' and number[index] <= '9' or number[index] == '.' or number[0] == '-')
 		{
 			validation = true;
@@ -127,7 +126,14 @@ bool symbolValidation(std::string number, bool validation, bool& signOut)
 		else return false;
 		if (number[index] == '.') dotCounter++;
 		if (dotCounter > 1) return false;
-		if (number[number.size() - 1] == '.') return false;
+		if (number[number.size() - 1] == '.' or number[number.size() - 1] == '0') return false;
+		if (number.find('.') > 1)
+		{
+			for (int i = 0; i < number.find('.') - 1; i++)
+			{
+				if (number[i] == '0' and number[i + 1] != 0) return false;
+			}
+		}
 	}
 	return true;
 }
